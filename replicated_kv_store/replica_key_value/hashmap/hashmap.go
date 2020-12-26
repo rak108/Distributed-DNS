@@ -1,5 +1,8 @@
-package replica_key_value
+package hashmap
 
+import(
+	"github.com/rak108/distributed-dns/replicated_kv_store/replica_key_value/hashmap/linkedlist"
+)
 const (
 	prime = 17003
 )

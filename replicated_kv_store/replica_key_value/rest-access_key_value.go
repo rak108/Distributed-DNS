@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"sync"
-
+    "github.com/rak108/distributed-dns/replicated_kv_store/replica_key_value/hashmap"
 	"github.com/gorilla/mux"
 )
 
