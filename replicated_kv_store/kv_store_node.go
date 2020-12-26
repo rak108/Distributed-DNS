@@ -74,7 +74,7 @@ func main() {
 
 	fmt.Printf("\nSuccessfully bound to address %v\n", address)
 	var addresskeyvalue string
-	fmt.Printf("\n Enter key value port: ")
+	fmt.Printf("\n Enter port to run key-value replica: ")
 	fmt.Scanf("%s", &addresskeyvalue)
 
 	go trial(addresskeyvalue)
