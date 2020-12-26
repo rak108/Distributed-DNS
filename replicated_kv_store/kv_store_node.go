@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"net/http"
+	"testing"
 	"net"
 	"os"
 	"time"
-	"testing"
-
 	"github.com/krithikvaidya/distributed-dns/replicated_kv_store/protos"
 	"google.golang.org/grpc"
+	"github.com/gorilla/mux"
 )
 
 var n_replica int
@@ -35,6 +36,22 @@ func init() {
 
 }
 
+func trial(addr string){
+	kv := newStore()
+	r := mux.NewRouter()
+	r.HandleFunc("/kvstore", kv.kvstoreHandler).Methods("GET")
+	r.HandleFunc("/{key}", kv.postHandler).Methods("POST")
+	r.HandleFunc("/{key}", kv.getHandler).Methods("GET")
+	r.HandleFunc("/{key}", kv.putHandler).Methods("PUT")
+	r.HandleFunc("/{key}", kv.deleteHandler).Methods("DELETE")
+
+	//Start the server and listen for requests
+	fmt.Printf("Starting server at port %s\n",addr)
+	if err := http.ListenAndServe(addr, r); err != nil {
+		log.Fatal(err)
+	}
+}
+
 func main() {
 
 	fmt.Println("\nRaft-based Replicated Key Value Store")
@@ -54,6 +71,11 @@ func main() {
 	CheckError(err)
 
 	fmt.Printf("\nSuccessfully bound to address %v\n", address)
+    var addresskeyvalue string
+	fmt.Printf("\n Enter key value port: ")
+	fmt.Scanf("%s",&addresskeyvalue)
+
+	go trial(addresskeyvalue)
 
 	fmt.Printf("\nEnter the addresses of %v other replicas: \n", n_replica-1)
 
