@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/rak108/distributed-dns/replicated_kv_store/replicated_key_value"
+	"github.com/rak108/distributed-dns/replicated_kv_store/replicate_key_value"
 	"github.com/krithikvaidya/distributed-dns/replicated_kv_store/protos"
 	"google.golang.org/grpc"
 )
